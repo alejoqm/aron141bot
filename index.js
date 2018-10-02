@@ -44,7 +44,7 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function(req, res) {
   const { message } = req.body
-
+  console.log("New request " + req)
   //Each message contains "text" and a "chat" object, which has an "id" which is the chat id
 
   var responsemessage = getResponseMessage();
@@ -73,8 +73,8 @@ app.post('/new-message', function(req, res) {
 )
 
 // Finally, start our server
-app.listen(3000, function() {
-  console.log('Telegram app listening on port 3000!')
+app.listen(config.port, function() {
+  console.log('Telegram app listening on port !' + config.port)
 })
 
 function getResponseMessage(word) {

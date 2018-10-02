@@ -8,29 +8,39 @@ var forEach = require("for-each")
 
 var jsonWords = {
 	"aron": {
-		"equal": "Destruyendo y Comiendo",
+		"equal": "Destruyendo y Comiendo | Estrenando camita | Buscando a mi mama",
 		"contains": "Te buscare y te mordere"
 	},
 	"maris": {
-		"equal": "Esta Durmiendo | Dejando un pidgey en un gimanio",
+		"equal": "Esta Durmiendo | Dejando un pidgey en un gimanio | Dime chiquita",
 		"contains": "OIEEEEEEEEEEEEEEEE"
 	},
 	"biker": {
 		"equal": "Buscando un tyranitar | Dejando un dito en un gimansio",
 		"contains": "no llega, vive en la calera."
 	},
-	"Pao": {
-		"equal": "Soy nivel 31",
+	"pao": {
+		"equal": "Soy nivel 31 | Ya va con su Charizard",
 		"contains": "Ya va con su Charizard."
 	},
-	"Paisa": {
-		"equal": "Se fue con su pajaro de tres cabezas.",
+	"paisa": {
+		"equal": "Se fue con su pajaro de tres cabezas. | ",
 		"contains": "Jugando FIFA."
 	},
-	"Tyranitar": {
+	"tyranitar": {
 		"equal": "Lo llaman el demoledor",
 		"contains": "Dejame buscar uno."
+	}, 
+	"hola": {
+		"equal": "Que dice la maquina | whatsuppppp | que se cuenta | Oh no you again"
+	},
+	"buenas Noches": {
+		"equal": "Descansa Fiera | Que tal el dia | "
+	},
+	"buenos Dias": {
+		equal: "Buen dia de casa | a por el tyranitar | otro dia de mewtwo"
 	}
+	
 };
 
 
@@ -74,16 +84,30 @@ app.post('/new-message', function(req, res) {
 )
 
 // Finally, start our server
-app.listen(process.env.PORT, function() {
-  console.log('Telegram app listening on port !' + process.env.PORT)
+app.listen((process.env.PORT || 3000), function() {
+  console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
 })
 
 function getResponseMessage(word) {
 	var response = "";
 	forEach(jsonWords, function (value, key, array) {
 		if(ignoreCase.equals(key, word)) {
-			response = value.equal;
+			var str = value.equal;
+			console.log(str + " " + str.indexOf("|"))
+			if(str.indexOf("|") !== -1) {
+				var res = str.split("|"); 
+				console.log(res.length)
+				var random = getRandomInt(res.length - 1);
+				response = res[random];
+			} else {
+				response = str;	
+			}
 		}
-	})
+	});
+	
 	return response;
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }

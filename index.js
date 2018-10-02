@@ -44,10 +44,10 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function(req, res) {
   const { message } = req.body
-  console.log("New request " + message)
+  console.log("New request " + message.text)
   //Each message contains "text" and a "chat" object, which has an "id" which is the chat id
 
-  var responsemessage = getResponseMessage(message );
+  var responsemessage = getResponseMessage(message.text);
   console.log("The response message is " + responsemessage)
   if(validator.isEmpty(responsemessage)) {
     return res.end()

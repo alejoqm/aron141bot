@@ -1,0 +1,30 @@
+{
+	"aron": {
+		"equal": "Destruyendo y Comiendo",
+		"contains": "Te buscare y te mordere"
+	},
+	"maris": {
+		"equal": "Esta Durmiendo | Dejando un pidgey en un gimanio",
+		"contains": "OIEEEEEEEEEEEEEEEE"
+	},
+	"biker": {
+		"equal": "Buscando un tyranitar | Dejando un dito en un gimansio",
+		"contains": "no llega, vive en la calera."
+	},
+	"Pao": {
+		"equal": "Soy nivel 31",
+		"contains": "Ya va con su Charizard."
+	},
+	"Paisa": {
+		"equal": "Se fue con su pajaro de tres cabezas.",
+		"contains": "Jugando FIFA."
+	},
+	"Tyranitar": {
+		"equal": "Lo llaman el demoledor",
+		"contains": "Dejame buscar uno."
+	}
+}
+	
+		
+	
+    

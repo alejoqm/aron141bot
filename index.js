@@ -24,7 +24,7 @@ var jsonWords = {
 		"contains": "Ya va con su Charizard."
 	},
 	"paisa": {
-		"equal": "Se fue con su pajaro de tres cabezas. | ",
+		"equal": "Se fue con su pajaro de tres cabezas. | Esta Jugando Fifa",
 		"contains": "Jugando FIFA."
 	},
 	"tyranitar": {
@@ -34,11 +34,11 @@ var jsonWords = {
 	"hola": {
 		"equal": "Que dice la maquina | whatsuppppp | que se cuenta | Oh no you again"
 	},
-	"buenas Noches": {
+	"buenas noches": {
 		"equal": "Descansa Fiera | Que tal el dia | "
 	},
-	"buenos Dias": {
-		equal: "Buen dia de casa | a por el tyranitar | otro dia de mewtwo"
+	"buenos dias": {
+		"equal": "Buen dia de caza | a por el tyranitar | otro dia de mewtwo"
 	}
 	
 };

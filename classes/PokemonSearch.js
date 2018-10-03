@@ -8,10 +8,10 @@ class PokemonSearch {
 	search(pokemon) {
 		var result = "";
 		scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {
-			console.log("data " + data)
 			result = err !== undefined ? err : data;
 		});	
-    	return result;
+		console.log("data " + result)
+		return result;
 	}
 }
 module.exports = PokemonSearch;

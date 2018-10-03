@@ -41,6 +41,9 @@ var jsonWords = {
 	},
 	"1,2": {
 		"equal": "Ultraviolento"
+	},
+	"Saben tambien quien": {
+		"equal": "Este"
 	}
 	
 };

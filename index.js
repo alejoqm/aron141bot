@@ -32,7 +32,7 @@ var jsonWords = {
 		"contains": "Dejame buscar uno."
 	}, 
 	"hola": {
-		"equal": "Que dice la maquina | whatsuppppp | que se cuenta | Oh no you again"
+		"equal": "Oliiiii | Que dice la maquina | whatsuppppp | que se cuenta | Oh no you again"
 	},
 	"buenas noches": {
 		"equal": "Descansa Fiera | Que tal el dia | "
@@ -65,18 +65,8 @@ app.post('/new-message', function(req, res) {
   if(validator.isEmpty(responsemessage)) {
     return res.end()
   } else {
-	  sendMessage(message, responsemessage)
-  }
-})
-
-
-// Finally, start our server
-app.listen((process.env.PORT || 3000), function() {
-  console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
-})
-
-function sendMessage(message, responsemessage) {
-	axios.post(
+	  //sendMessage(message, responsemessage)
+	  axios.post(
       'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
       {
         chat_id: message.chat.id,
@@ -92,7 +82,18 @@ function sendMessage(message, responsemessage) {
       // ...and here if it was not
       console.log('Error :', err)
       res.end('Error :' + err)
-    })  
+    }) 
+  }
+})
+
+
+// Finally, start our server
+app.listen((process.env.PORT || 3000), function() {
+  console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
+})
+
+function sendMessage(message, responsemessage) {
+	 
 }
 
 

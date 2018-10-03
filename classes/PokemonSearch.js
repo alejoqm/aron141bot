@@ -5,13 +5,15 @@ class PokemonSearch {
    constructor() {
    }
    
-	search(pokemon) {
+	search(pokemon, callback, message, res) {
+		console.log(pokemon)
 		var result = "";
 		scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {
-			result = err !== undefined ? err : data;
+			console.log(err + " " + data)
+			result = err !== null ? err : data;
+			console.log("data " + result)
+			callback(message, result, res);
 		});	
-		console.log("data " + result)
-		return result;
 	}
 }
 module.exports = PokemonSearch;

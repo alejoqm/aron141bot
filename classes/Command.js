@@ -50,12 +50,12 @@ class Command {
    constructor() {
    }
    
-   resolve(textMessage) {
+   resolve(message, textMessage, callback, res) {
 	   var command = textMessage.split(" ");
 	   if(ignoreCase.equals(command[0], "pokemon")) {
-		   return pokemon.search(command[1]);
+		   pokemon.search(command[1], callback, message, res);
 	   } else {
-		   return this.getResponseMessage(textMessage);
+		   callback(message, this.getResponseMessage(textMessage), res);
 	   }
    }
 

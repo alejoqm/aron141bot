@@ -18,14 +18,7 @@ app.use(
 app.post('/new-message', function(req, res) {
   const { message } = req.body
   console.log("New request " + message.text)
-  var responsemessage = command.resolve(message.text);
-  console.log("The response message is " + responsemessage)
-  if(validator.isEmpty(responsemessage)) {
-    return res.end()
-  } else {
-	  var publisher = new Publisher();
-	  publisher.publish(message, responsemessage, res);
-  }
+  command.resolve(message, message.text, publish, res);
 })
 
 
@@ -33,3 +26,13 @@ app.post('/new-message', function(req, res) {
 app.listen((process.env.PORT || 3000), function() {
   console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
 })
+
+function publish(message, responsemessage, res) {
+	console.log("The response message is " + responsemessage)
+   if(validator.isEmpty(responsemessage)) {
+    return res.end()
+   } else {
+	  var publisher = new Publisher();
+	  publisher.publish(message, responsemessage, res);
+   }
+}

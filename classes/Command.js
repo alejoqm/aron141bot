@@ -78,8 +78,7 @@ class Command {
 		forEach(jsonWords, function (value, key, array) {
 			if(ignoreCase.equals(key, word)) {
 				var str = value.equal;
-				console.log(str + " " + str.indexOf("|"))
-				if(str.indexOf("|") !== -1) {
+				if(str != undefined &&  str.indexOf("|") !== -1) {
 					var res = str.split("|"); 
 					console.log(res.length)
 					var random = that.getRandomInt(res.length - 1);
@@ -89,7 +88,7 @@ class Command {
 				}
 			} else if (word.toLowerCase().search(key.toLowerCase()) !== -1){
 				var str = value.contains;
-				if(str.indexOf("|") !== -1) {
+				if(str != undefined && str.indexOf("|") !== -1) {
 					var res = str.split("|"); 
 					console.log(res.length)
 					var random = that.getRandomInt(res.length - 1);

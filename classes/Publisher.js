@@ -2,6 +2,9 @@ const axios = require('axios')
 
 class Publisher {
 
+   constructor() {
+   }
+
   publish(message, responseMessage) {
 	axios.post(
       'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',

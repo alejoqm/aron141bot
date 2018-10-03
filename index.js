@@ -83,7 +83,7 @@ function getResponseMessage(word) {
 				var res = str.split("|"); 
 				console.log(res.length)
 				var random = getRandomInt(res.length - 1);
-				response = word + " -> " + res[random];
+				response = key + " -> " + res[random];
 			} else {
 				response = str;	
 			}

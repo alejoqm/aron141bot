@@ -1,7 +1,6 @@
 const axios = require('axios')
 
 class Publisher {
-
    constructor() {
    }
 
@@ -27,3 +26,4 @@ class Publisher {
   }
 
 }
+module.exports = Publisher;

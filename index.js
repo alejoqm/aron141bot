@@ -76,11 +76,6 @@ app.listen((process.env.PORT || 3000), function() {
   console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
 })
 
-function sendMessage(message, responsemessage) {
-	 
-}
-
-
 function getResponseMessage(word) {
 	var response = "";
 	forEach(jsonWords, function (value, key, array) {

@@ -51,6 +51,7 @@ class Command {
    }
    
    resolve(message, textMessage, callback, res) {
+	if(textMessage !== undefined) {   
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
 	   	if(ignoreCase.equals(command[0], "pokemon")) {
@@ -61,6 +62,9 @@ class Command {
 	   } else {
 	  	   callback(message, "", res);
 	   }
+        } else {
+        	  callback(message, "", res);
+	}
    }
 
 

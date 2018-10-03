@@ -16,7 +16,7 @@ var jsonWords = {
 		"contains": "OIEEEEEEEEEEEEEEEE"
 	},
 	"biker": {
-		"equal": "Buscando un tyranitar | Dejando un dito en un gimansio",
+		"equal": "Buscando un tyranitar | Dejando un dito en un gimnasio | No llega, vive en la calera.",
 		"contains": "no llega, vive en la calera."
 	},
 	"pao": {
@@ -28,7 +28,7 @@ var jsonWords = {
 		"contains": "Jugando FIFA."
 	},
 	"tyranitar": {
-		"equal": "Lo llaman el demoledor",
+		"equal": "Lo llaman el demoledor | Gracias biker por dejarnos morir",
 		"contains": "Dejame buscar uno."
 	}, 
 	"hola": {
@@ -39,6 +39,9 @@ var jsonWords = {
 	},
 	"buenos dias": {
 		"equal": "Buen dia de caza | a por el tyranitar | otro dia de mewtwo"
+	},
+	"1,2": {
+		"equal": "Ultraviolento"
 	}
 	
 };
@@ -61,9 +64,19 @@ app.post('/new-message', function(req, res) {
   console.log("The response message is " + responsemessage)
   if(validator.isEmpty(responsemessage)) {
     return res.end()
+  } else {
+	  sendMessage(message, responsemessage)
   }
-  
-  axios.post(
+})
+
+
+// Finally, start our server
+app.listen((process.env.PORT || 3000), function() {
+  console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
+})
+
+function sendMessage(message, responsemessage) {
+	axios.post(
       'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
       {
         chat_id: message.chat.id,
@@ -80,13 +93,8 @@ app.post('/new-message', function(req, res) {
       console.log('Error :', err)
       res.end('Error :' + err)
     })  
-  }
-)
+}
 
-// Finally, start our server
-app.listen((process.env.PORT || 3000), function() {
-  console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
-})
 
 function getResponseMessage(word) {
 	var response = "";

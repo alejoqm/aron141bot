@@ -66,7 +66,7 @@ app.post('/new-message', function(req, res) {
   } else {
 	  //sendMessage(message, responsemessage)
 	  var publisher = new Publisher();
-	  publisher.publish(message, responsemessage);
+	  publisher.publish(message, responsemessage, res);
   }
 })
 

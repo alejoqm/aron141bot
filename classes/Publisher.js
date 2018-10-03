@@ -4,7 +4,7 @@ class Publisher {
    constructor() {
    }
 
-  publish(message, responseMessage) {
+  publish(message, responseMessage, res) {
 	axios.post(
       'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
       {

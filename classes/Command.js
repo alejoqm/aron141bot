@@ -52,10 +52,14 @@ class Command {
    
    resolve(message, textMessage, callback, res) {
 	   var command = textMessage.split(" ");
-	   if(ignoreCase.equals(command[0], "pokemon")) {
+	   if(Array.isArray(command)) {   
+	   	if(ignoreCase.equals(command[0], "pokemon")) {
 		   pokemon.search(command[1], callback, message, res);
-	   } else {
+	   	} else {
 		   callback(message, this.getResponseMessage(textMessage), res);
+	   	}
+	   } else {
+	  	   callback(message, "", res);
 	   }
    }
 

@@ -11,6 +11,7 @@ class PokemonSearch {
 		scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {
 			console.log(err + " " + data)
 			result = err !== null ? err : data;
+			result = Array.isArray(result) ? result[0] : result;
 			console.log("data " + result)
 			callback(message, result, res);
 		});	

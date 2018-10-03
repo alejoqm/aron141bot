@@ -29,10 +29,14 @@ app.listen((process.env.PORT || 3000), function() {
 
 function publish(message, responsemessage, res) {
 	console.log("The response message is " + responsemessage)
-   if(validator.isEmpty(responsemessage)) {
-    return res.end()
-   } else {
-	  var publisher = new Publisher();
-	  publisher.publish(message, responsemessage, res);
-   }
+   if(responseMessage !== undefined) {  
+   	if(validator.isEmpty(responsemessage)) {
+    		return res.end()
+   	} else {
+		var publisher = new Publisher();
+	  	publisher.publish(message, responsemessage, res);
+   	}
+    } else {
+       return res.end();
+    }
 }

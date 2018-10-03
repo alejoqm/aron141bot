@@ -76,14 +76,14 @@ app.listen((process.env.PORT || 3000), function() {
 function getResponseMessage(word) {
 	var response = "";
 	forEach(jsonWords, function (value, key, array) {
-		if(ignoreCase.equals(key, word)) {
+		if(word.toLowerCase().search(key.toLowerCase()) !== -1) {
 			var str = value.equal;
 			console.log(str + " " + str.indexOf("|"))
 			if(str.indexOf("|") !== -1) {
 				var res = str.split("|"); 
 				console.log(res.length)
 				var random = getRandomInt(res.length - 1);
-				response = res[random];
+				response = word + " -> " + res[random];
 			} else {
 				response = str;	
 			}

@@ -1,11 +1,10 @@
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
-const axios = require('axios')
 var ignoreCase = require('ignore-case');
 var validator = require('validator');
 var forEach = require("for-each")
-
+var Publisher = require("./classes/Publisher.js")
 var jsonWords = {
 	"aron": {
 		"equal": "Destruyendo y Comiendo | Estrenando camita | Buscando a mi mama",
@@ -66,23 +65,8 @@ app.post('/new-message', function(req, res) {
     return res.end()
   } else {
 	  //sendMessage(message, responsemessage)
-	  axios.post(
-      'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
-      {
-        chat_id: message.chat.id,
-        text: responsemessage
-      }
-    )
-    .then(response => {
-      // We get here if the message was successfully posted
-      console.log('Message posted')
-      res.end('ok')
-    })
-    .catch(err => {
-      // ...and here if it was not
-      console.log('Error :', err)
-      res.end('Error :' + err)
-    }) 
+	  var publisher = new Publisher();
+	  publisher.publish(message, responsemessage);
   }
 })
 

@@ -29,7 +29,7 @@ app.listen((process.env.PORT || 3000), function() {
 
 function publish(message, responsemessage, res) {
 	console.log("The response message is " + responsemessage)
-   if(responseMessage !== undefined) {  
+   if(responsemessage !== undefined) {  
    	if(validator.isEmpty(responsemessage)) {
     		return res.end()
    	} else {

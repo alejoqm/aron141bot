@@ -13,7 +13,7 @@ class PokemonSearch {
 			scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {
 				console.log(err + " " + data)
 				if(err !== null) {
-				   callback(message, "", res);
+				   callback(message, errorMsg, res);
 				} else {
 				   result = Array.isArray(data) ? data[0] : data;
 				   console.log("data " + result)

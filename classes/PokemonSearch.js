@@ -1,7 +1,7 @@
 var scrapy = require('node-scrapy')
 var baseUrl = "https://www.pokemon.com/us/pokedex/";
 var selector = ".version-descriptions .version-y";
-var errorMsg = "Rili!! ese pokemon este, te buscare y te mordere";
+var errorMsg = "Rili!! pokemon este, te buscare y te mordere";
 class PokemonSearch {
    constructor() {
    }

@@ -2,8 +2,7 @@ var ignoreCase = require('ignore-case');
 var forEach = require("for-each")
 var PokemonSearch = require("./PokemonSearch.js")
 var pokemon = new PokemonSearch();
-var StringUtils = require("./StringUtils.js")
-var stringUtils = new StringUtils();
+var accents = require('remove-accents');
 
 var jsonWords = {
 	"aron": {
@@ -53,7 +52,7 @@ class Command {
    }
    
    resolve(message, textMessage, callback, res) {
-	textMessage = stringUtils.remove(textMessage);
+	textMessage = accents.remove(textMessage);
 	if(textMessage !== undefined) {   
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   

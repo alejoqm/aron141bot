@@ -23,7 +23,7 @@ class PokemonSearch {
 		}
 		catch(err) {
 			console.log(err)
-			result = "";
+			callback(message, errorMsg, res);
 		}	
 	}
 }

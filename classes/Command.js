@@ -3,6 +3,8 @@ var forEach = require("for-each")
 var PokemonSearch = require("./PokemonSearch.js")
 var pokemon = new PokemonSearch();
 var accents = require('remove-accents');
+var Greetings = require("./Greetings.js")
+var greetings = new Greetings();
 
 var jsonWords = {
 	"aron": {
@@ -58,7 +60,9 @@ class Command {
 	   if(Array.isArray(command)) {   
 	   	if(ignoreCase.equals(command[0], "pokemon")) {
 		   pokemon.search(command[1], callback, message, res);
-	   	} else {
+	   	} else if(ignoreCase.equals(command[0], "hola")) {
+	   		callback(message, greetings.sayHello(message), res)
+		} else {
 		   callback(message, this.getResponseMessage(textMessage), res);
 	   	}
 	   } else {

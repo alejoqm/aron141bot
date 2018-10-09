@@ -17,6 +17,9 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function(req, res) {
   const { message } = req.body
+  if(message.text == undefined) {
+      res.end();
+  }
   console.log("New request " + message.text)
   command.resolve(message, message.text, publish, res);
 })

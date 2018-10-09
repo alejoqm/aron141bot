@@ -3,7 +3,7 @@ class Greetings {
     }
 
     sayHello(message) {
-        return "Hola " + message.from.username;
+        return "Hola @" + message.from.username;
     }
 
 }

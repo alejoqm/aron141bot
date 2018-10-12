@@ -1,3 +1,4 @@
+var validator = require('validator');
 var ignoreCase = require('ignore-case');
 var forEach = require("for-each")
 var PokemonSearch = require("./PokemonSearch.js")
@@ -5,7 +6,8 @@ var pokemon = new PokemonSearch();
 var accents = require('remove-accents');
 var Greetings = require("./Greetings.js")
 var greetings = new Greetings();
-
+var NickNameValidation = require('./NickNameValidation.js');
+var nickNameValidation = new NickNameValidation();
 var jsonWords = {
 	"aron": {
 		"equal": "Destruyendo y Comiendo | Estrenando camita | Buscando a mi mama",
@@ -63,7 +65,7 @@ class Command {
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		callback(message, greetings.sayHello(message), res)
 		} else {
-		   callback(message, this.getResponseMessage(textMessage), res);
+		   callback(message, this.getResponseMessage(message, textMessage), res);
 	   	}
 	   } else {
 	  	   callback(message, "", res);
@@ -78,7 +80,7 @@ class Command {
 	  return Math.floor(Math.random() * Math.floor(max));
 	}
    
-	getResponseMessage(word) {
+	getResponseMessage(message, word) {
 		var response = "";
 		var that = this;
 		forEach(jsonWords, function (value, key, array) {
@@ -104,7 +106,11 @@ class Command {
 				}
 			}
 		});
-		
+
+		if(validator.isEmpty(response)) {
+            return nickNameValidation.saySomegthing(message);
+		}
+
 		return response;
 	}
 }

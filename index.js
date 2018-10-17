@@ -7,6 +7,14 @@ var Publisher = require("./classes/Publisher.js")
 var Command = require("./classes/Command.js")
 var command = new Command();
 
+
+var Offensive = require("./classes/Offensive.js")
+var offensive = new Offensive();
+
+var SubjectName = require("./classes/SubjectName.js")
+var subjectName = new SubjectName();
+
+
 app.use(bodyParser.json()) // for parsing application/json
 app.use(
   bodyParser.urlencoded({
@@ -19,9 +27,13 @@ app.post('/new-message', function(req, res) {
   const { message } = req.body
   if(message.text == undefined) {
       res.end();
+  } else if(subjectName.getSubjectName(message.text) == "aron" && offensive.hasOffensiveContent(message.text)) {
+    publish(message, "Are you talking with me?", res);
+  } else {
+      console.log("New request " + message.text)
+      command.resolve(message, message.text, publish, res);
   }
-  console.log("New request " + message.text)
-  command.resolve(message, message.text, publish, res);
+
 })
 
 

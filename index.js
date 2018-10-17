@@ -27,13 +27,12 @@ app.post('/new-message', function(req, res) {
   const { message } = req.body
   var subjectName = subjectName.getSubjectName(message.text);
   var offensive = offensive.hasOffensiveContent(message.text);
-  console.log(subjectName + " " + offensive)
+  console.log('New message ' + message.text + ' Subject ' + subjectName + " " + offensive)
   if(message.text == undefined) {
       res.end();
   } else if(ignoreCase.equals("aron", subjectName) && offensive) {
     publish(message, "Are you talking with me?", res);
   } else {
-      console.log("New request " + message.text)
       command.resolve(message, message.text, publish, res);
   }
 

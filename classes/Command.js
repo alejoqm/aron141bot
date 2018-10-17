@@ -47,6 +47,9 @@ var jsonWords = {
 	},
 	"saben": {
 		"equal": "Este"
+	},
+	"cual":{
+		"contains": "este."
 	}
 	
 };

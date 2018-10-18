@@ -34,7 +34,7 @@ app.post('/new-message', function(req, res) {
   console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
 
   if(ignoreCase.equals("aron", subjectNameValue) && offensiveValue) {
-    publish(message, "Are you talking with me?", res);
+    publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
   } else {
       command.resolve(message, message.text, publish, res);
   }

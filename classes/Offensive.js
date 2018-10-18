@@ -1,5 +1,5 @@
 var forEach = require("for-each")
-var offensiveWords = ["gay", "chupelo", "bobo", "tonto", "sapo"];
+var offensiveWords = ["gay", "chupelo", "bobo", "tonto", "sapo", "fucker", "silly", "bitch", "puto", "puta"];
 var accents = require('remove-accents');
 
 class Offensive {

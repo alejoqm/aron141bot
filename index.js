@@ -25,12 +25,15 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function(req, res) {
   const { message } = req.body
+  if(message.text == undefined) {
+      res.end();
+  }
+
   var subjectName = subjectName.getSubjectName(message.text);
   var offensive = offensive.hasOffensiveContent(message.text);
   console.log('New message ' + message.text + ' Subject ' + subjectName + " " + offensive)
-  if(message.text == undefined) {
-      res.end();
-  } else if(ignoreCase.equals("aron", subjectName) && offensive) {
+
+  if(ignoreCase.equals("aron", subjectName) && offensive) {
     publish(message, "Are you talking with me?", res);
   } else {
       command.resolve(message, message.text, publish, res);

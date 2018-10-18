@@ -29,11 +29,11 @@ app.post('/new-message', function(req, res) {
       res.end();
   }
 
-  var subjectName = subjectName.getSubjectName(message.text);
-  var offensive = offensive.hasOffensiveContent(message.text);
-  console.log('New message ' + message.text + ' Subject ' + subjectName + " " + offensive)
+  var subjectNameValue = subjectName.getSubjectName(message.text);
+  var offensiveValue = offensive.hasOffensiveContent(message.text);
+  console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
 
-  if(ignoreCase.equals("aron", subjectName) && offensive) {
+  if(ignoreCase.equals("aron", subjectNameValue) && offensiveValue) {
     publish(message, "Are you talking with me?", res);
   } else {
       command.resolve(message, message.text, publish, res);

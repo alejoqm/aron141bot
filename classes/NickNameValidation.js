@@ -3,6 +3,10 @@ class NickNameValidation {
     }
 
     saySomegthing(message) {
+        if(message.from.username == undefined) {
+            return "";
+        }
+
         if(message.from.username == 'DiegoLAA90')
             return "Chupelo";
         else if (message.from.username.toLowerCase().includes('Alejoqm'.toLowerCase()))

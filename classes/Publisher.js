@@ -14,7 +14,6 @@ class Publisher {
     )
     .then(response => {
       // We get here if the message was successfully posted
-      console.log('Message posted')
       res.end('ok')
     })
     .catch(err => {

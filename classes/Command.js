@@ -91,7 +91,6 @@ class Command {
 				var str = value.equal;
 				if(str != undefined &&  str.indexOf("|") !== -1) {
 					var res = str.split("|"); 
-					console.log(res.length)
 					var random = that.getRandomInt(res.length - 1);
 					response = res[random];
 				} else {
@@ -101,7 +100,6 @@ class Command {
 				var str = value.contains;
 				if(str != undefined && str.indexOf("|") !== -1) {
 					var res = str.split("|"); 
-					console.log(res.length)
 					var random = that.getRandomInt(res.length - 1);
 					response = res[random];
 				} else {

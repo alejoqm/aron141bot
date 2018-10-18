@@ -11,9 +11,7 @@ class Offensive {
         var response = false;
         text = accents.remove(text);
         forEach(offensiveWords, function (value, key, array) {
-            console.log(text + " " + value)
             if (text.toLowerCase().search(value.toLowerCase()) !== -1) {
-                console.log("Contains")
                 response = true;
             }
         })

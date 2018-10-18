@@ -7,7 +7,6 @@ class PokemonSearch {
    }
    
 	search(pokemon, callback, message, res) {
-		console.log(pokemon)
 		var result = "";
 		try {
 			scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {

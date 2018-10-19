@@ -11,7 +11,7 @@ class NickNameValidation {
         if(message.from.username == 'DiegoLAA90')
             return "Biker la plata del community day";
 
-    },
+    }
 
     saySomegthing(message) {
         if(message.from.username == undefined) {

@@ -22,7 +22,7 @@ class NickNameValidation {
             return "Chupelo";
         else if (message.from.username.toLowerCase().includes('Alejoqm'.toLowerCase()))
             return "@" + message.from.username + " deje de enseñarme pendejadas y  literalmente maricadas!";
-        else if (message.from.username == 'polita192_31')
+        else if (message.from.username == 'polita193_31')
             return "@" + message.from.username + " Dame una galleta!";
         else
             return "";

@@ -60,7 +60,9 @@ class Command {
    
    resolve(message, textMessage, callback, res) {
 	textMessage = accents.remove(textMessage);
-	if(textMessage !== undefined) {   
+
+
+	if(textMessage !== undefined) {
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
 	   	if(ignoreCase.equals(command[0], "pokemon")) {

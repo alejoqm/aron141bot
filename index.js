@@ -33,6 +33,11 @@ app.post('/new-message', function(req, res) {
   var offensiveValue = offensive.hasOffensiveContent(message.text);
   console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
 
+  if(message.media !== undefined) {
+      console.log(message.media);
+      publish(message, "Que linda foto!", res)
+  }
+
   if(ignoreCase.equals("aron", subjectNameValue) && offensiveValue) {
     publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
   } else {

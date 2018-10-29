@@ -11,6 +11,9 @@ var command = new Command();
 var Offensive = require("./classes/Offensive.js")
 var offensive = new Offensive();
 
+var Gratitude = require("./classes/Gratitude.js")
+var gratitude = new Gratitude();
+
 var SubjectName = require("./classes/SubjectName.js")
 var subjectName = new SubjectName();
 
@@ -25,25 +28,23 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function(req, res) {
   const { message } = req.body
-  if(message.text == undefined) {
-      if(message.photo !== undefined) {
-          console.log(message.photo);
-          publish(message, "Que linda foto!", res)
-      } else {
-          res.end();
-      }
-  } else {
+    if(message.photo !== undefined) {
+        console.log(message.photo);
+        publish(message, "Que linda foto!", res)
+    }
+    else if(message.text == undefined) {
+      res.end();
+    } else {
       var subjectNameValue = subjectName.getSubjectName(message.text);
       var offensiveValue = offensive.hasOffensiveContent(message.text);
+      var gratitudeValue = gratitude.hasGratitudeContent(message.text);
       console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
 
-      if(message.media !== undefined) {
-          console.log(message.media);
-          publish(message, "Que linda foto!", res)
-      }
-
-      if(ignoreCase.equals("aron", subjectNameValue) && offensiveValue) {
-          publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
+      if(ignoreCase.equals("aron", subjectNameValue)) {
+          if(offensiveValue)
+            publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
+          else if(gratitudeValue)
+              publish(message, "Gracias a ti", res);
       } else {
           command.resolve(message, message.text, publish, res);
       }

@@ -26,8 +26,8 @@ app.use(
 app.post('/new-message', function(req, res) {
   const { message } = req.body
   if(message.text == undefined) {
-      if(message.media !== undefined) {
-          console.log(message.media);
+      if(message.photo !== undefined) {
+          console.log(message.photo);
           publish(message, "Que linda foto!", res)
       } else {
           res.end();

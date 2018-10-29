@@ -18,6 +18,11 @@ class NickNameValidation {
             return "";
         }
 
+        var itShouldReponse = this.getRandomInt(0, 100);
+        if(itShouldReponse < 80) {
+            return "";
+        }
+
         if(message.from.username == 'DiegoLAA90')
             return "Chupelo";
         else if (message.from.username.toLowerCase().includes('Alejoqm'.toLowerCase()))
@@ -27,6 +32,11 @@ class NickNameValidation {
         else
             return "";
     }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
 
 }
 module.exports = NickNameValidation;

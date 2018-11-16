@@ -50,6 +50,9 @@ var jsonWords = {
 	},
 	"cual":{
 		"contains": "este."
+	},
+	"donde":{
+		"contains": "donde no le llega el sol"
 	}
 	
 };

@@ -27,6 +27,12 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function (req, res) {
     const {message} = req.body
+
+    //Validate time of message
+    var unix = Math.round(+new Date()/1000);
+    console.log("unix time " + unix);
+    console.log("Message time " + message.date);
+
     if (message.photo !== undefined) {
         console.log(message.photo);
         publish(message, "Que linda foto!", res)

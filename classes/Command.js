@@ -68,8 +68,8 @@ class Command {
 	if(textMessage !== undefined) {
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
-	   	if(ignoreCase.equals(command[0], "pokemon")) {
-		   pokemon.search(command[1], callback, message, res);
+	   	if(pokemon.isACommand(command[0])) {
+		   pokemon.perform(command[0], command[1], callback, message, res);
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		callback(message, greetings.sayHello(message), res)
 		} else {

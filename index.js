@@ -30,32 +30,32 @@ app.post('/new-message', function (req, res) {
 
     //Validate time of message
     var unix = Math.round(+new Date()/1000);
-    console.log("unix time " + unix);
-    console.log("Message time " + message.date);
-
-    if (message.photo !== undefined) {
-        console.log(message.photo);
-        publish(message, "Que linda foto!", res)
-    }
-    else if (message.text == undefined) {
+    if( (message == null || message.date == undefined || unix - message.date) > 5000 ) {
+        console.log("Message too old.")
         res.end();
     } else {
-        var subjectNameValue = subjectName.getSubjectName(message.text);
-        var offensiveValue = offensive.hasOffensiveContent(message.text);
-        var gratitudeValue = gratitude.hasGratitudeContent(message.text);
-        console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
-
-        if (ignoreCase.equals("aron", subjectNameValue)) {
-            if (offensiveValue)
-                publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
-            else if (gratitudeValue)
-                publish(message, "Gracias a ti", res);
+        if (message.photo !== undefined) {
+            console.log(message.photo);
+            publish(message, "Que linda foto!", res)
+        }
+        else if (message.text == undefined) {
+            res.end();
         } else {
-            command.resolve(message, message.text, publish, res);
+            var subjectNameValue = subjectName.getSubjectName(message.text);
+            var offensiveValue = offensive.hasOffensiveContent(message.text);
+            var gratitudeValue = gratitude.hasGratitudeContent(message.text);
+            console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
+
+            if (ignoreCase.equals("aron", subjectNameValue)) {
+                if (offensiveValue)
+                    publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
+                else if (gratitudeValue)
+                    publish(message, "Gracias a ti", res);
+            } else {
+                command.resolve(message, message.text, publish, res);
+            }
         }
     }
-
-
 })
 
 

@@ -47,10 +47,13 @@ app.post('/new-message', function (req, res) {
             console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
 
             if (ignoreCase.equals("aron", subjectNameValue)) {
-                if (offensiveValue)
+                if (offensiveValue) {
                     publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU", res);
-                else if (gratitudeValue)
+                } else if (gratitudeValue) {
                     publish(message, "Gracias a ti", res);
+                } else {
+                    command.resolve(message, message.text, publish, res);
+                }
             } else {
                 command.resolve(message, message.text, publish, res);
             }

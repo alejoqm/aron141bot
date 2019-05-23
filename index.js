@@ -39,7 +39,7 @@ app.post('/new-message', function (req, res) {
         console.log(message.forward_from !== undefined + ' ' +  message.forward_from_chat !== undefined);
         if(message.forward_from !== undefined || message.forward_from_chat !== undefined) {
             console.log('This message was forwarded');
-            publish(message, 'Seriusly ' + message.from.username + ', generando spam!!');
+            publish(message, 'Seriusly ' + message.from.username + ', generando spam!!', res);
         } else if (message.photo !== undefined) {
             console.log(message.photo);
             //publish(message, "Que linda foto!", res)

@@ -28,7 +28,7 @@ app.use(
 //This is the route the API will call
 app.post('/new-message', function (req, res) {
     const {message} = req.body
-
+    console.log('Message ' + message);
     //Validate time of message
     var unix = Math.round(+new Date()/1000);
     if( (message === null || message === undefined || message.date === undefined || unix - message.date) > 5000 ) {

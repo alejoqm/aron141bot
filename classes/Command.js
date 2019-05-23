@@ -8,6 +8,9 @@ var Greetings = require("./Greetings.js")
 var greetings = new Greetings();
 var NickNameValidation = require('./NickNameValidation.js');
 var nickNameValidation = new NickNameValidation();
+var Youtube = require("./Youtube.js")
+var youtube = new Youtube();
+
 var jsonWords = {
 	"aron": {
 		"equal": "Destruyendo y Comiendo | Estrenando camita | Buscando a mi mama",
@@ -72,7 +75,10 @@ class Command {
 		   pokemon.perform(command[0], command[1], callback, message, res);
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		callback(message, greetings.sayHello(message), res)
-		} else {
+		} else if(ignoreCase.equals(command[0], "youtube")) {
+			youtube.search(command[1], message, res, callback);
+	 	} 
+		else {
 		   callback(message, this.getResponseMessage(message, textMessage), res);
 	   	}
 	   } else {

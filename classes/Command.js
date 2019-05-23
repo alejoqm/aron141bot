@@ -77,7 +77,7 @@ class Command {
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		callback(message, greetings.sayHello(message), res)
 		} else if(ignoreCase.equals(command[0], "youtube")) {
-			youtube.search(new Regex('youtube', 'i').Replace(textMessage, ''), message, res, callback);
+			youtube.search(textMessage.subString(7, textMessage.length), message, res, callback);
 	 	} 
 		else {
 		   callback(message, this.getResponseMessage(message, textMessage), res);

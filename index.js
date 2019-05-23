@@ -36,7 +36,10 @@ app.post('/new-message', function (req, res) {
         console.log("Message too old or undefined.")
         res.end();
     } else {
-        if (message.photo !== undefined) {
+        if(message.forward_from !== undefined || message.forward_from_chat !== undefined) {
+            console.log('This message was forwarded');
+            publish(message, 'Seriusly ' + message.from.username + ', generando spam!!');
+        } else if (message.photo !== undefined) {
             console.log(message.photo);
             //publish(message, "Que linda foto!", res)
             res.end();

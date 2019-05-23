@@ -31,7 +31,7 @@ app.post('/new-message', function (req, res) {
 
     //Validate time of message
     var unix = Math.round(+new Date()/1000);
-    if( (message == null || message.date == undefined || unix - message.date) > 5000 ) {
+    if( (message === null || message === undefined || message.date === undefined || unix - message.date) > 5000 ) {
         console.log("Message too old.")
         res.end();
     } else {

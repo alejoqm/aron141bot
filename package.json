@@ -23,6 +23,7 @@
     "node-telegram-bot-api": "^0.30.0",
     "regex": "^0.1.1",
     "remove-accents": "^0.4.2",
+    "replace-string": "^3.0.0",
     "validator": "^10.8.0"
   }
 }

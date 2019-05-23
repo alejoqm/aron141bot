@@ -10,7 +10,7 @@ var NickNameValidation = require('./NickNameValidation.js');
 var nickNameValidation = new NickNameValidation();
 var Youtube = require("./Youtube.js")
 var youtube = new Youtube();
-var Regex = require("regex");
+const replaceString = require('replace-string');
 
 var jsonWords = {
 	"aron": {
@@ -77,7 +77,7 @@ class Command {
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		callback(message, greetings.sayHello(message), res)
 		} else if(ignoreCase.equals(command[0], "youtube")) {
-			youtube.search(textMessage.subString(7, textMessage.length), message, res, callback);
+			youtube.search(replaceString(textMessage.toLowerCase(), "youtube", ''), message, res, callback);
 	 	} 
 		else {
 		   callback(message, this.getResponseMessage(message, textMessage), res);

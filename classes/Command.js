@@ -10,6 +10,7 @@ var NickNameValidation = require('./NickNameValidation.js');
 var nickNameValidation = new NickNameValidation();
 var Youtube = require("./Youtube.js")
 var youtube = new Youtube();
+var Regex = require("regex");
 
 var jsonWords = {
 	"aron": {

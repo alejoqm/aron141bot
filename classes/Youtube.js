@@ -1,15 +1,9 @@
 var KEY_ID = 'AIzaSyC6CZXer_2wDORWvdhKQIildDG7xNoU5ec';
 const https = require('https');
-const GOOGLE_API = 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=%s&q=%s';
-const API_KEY = 'AIzaSyC6CZXer_2wDORWvdhKQIildDG7xNoU5ec';
+const GOOGLE_API = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=%s&q=%s';
 var util = require('util');
 const BASE_YOUTUBE_URL = "https://www.youtube.com/watch?v=%s"
  
-
-
-let soMany = 10;
-console.log(`This is ${soMany} times easier!`);
-
 class Youtube {
     constructor() {
     }

@@ -38,7 +38,8 @@ app.post('/new-message', function (req, res) {
     } else {
         if (message.photo !== undefined) {
             console.log(message.photo);
-            publish(message, "Que linda foto!", res)
+            //publish(message, "Que linda foto!", res)
+            res.end();
         }
         else if (message.text == undefined) {
             res.end();

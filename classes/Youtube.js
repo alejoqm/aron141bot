@@ -20,7 +20,7 @@ class Youtube {
 
             // The whole response has been received. Print out the result.
             resp.on('end', () => {
-                if(JSON.parse(data).items !== undefined && JSON.parse(data).items.lenght > 0 && JSON.parse(data).items[0].id !== undefined && JSON.parse(data).items[0].id.videoId !== undefined) {
+                if(JSON.parse(data).items !== undefined && JSON.parse(data).items[0].id !== undefined && JSON.parse(data).items[0].id.videoId !== undefined) {
                     callback(message, util.format(BASE_YOUTUBE_URL, JSON.parse(data).items[0].id.videoId), res);
                 } else {
                     callback(message, '', res);

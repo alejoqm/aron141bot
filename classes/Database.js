@@ -17,7 +17,8 @@ class Database {
 
     static insertMessage(username, message) {
         var date = new Date();
-        var INSERT = "insert into message VALUES(unique_rowid(), '" + username + "', '" + message + "', " + date.getTime() + ");";
+        var INSERT = "insert into public.message VALUES(unique_rowid(), '" + username + "', '" + message + "', " + date.getTime() + ");";
+        console.log(INSERT);
         Database.getPool().query(INSERT, (error, results) => {
             if (error) {
                 console.log(error);

@@ -5,6 +5,7 @@ var ignoreCase = require('ignore-case');
 var validator = require('validator');
 var Publisher = require("./classes/Publisher.js")
 var Command = require("./classes/Command.js")
+var Database = require("./classes/Database.js")
 
 var command = new Command();
 
@@ -71,6 +72,7 @@ app.post('/new-message', function (req, res) {
 
 // Finally, start our server
 app.listen((process.env.PORT || 3000), function () {
+    Database.insertMessage("DiegoR", "Diego Test");
     console.log('Telegram app listening on port !' + (process.env.PORT || 3000))
 })
 

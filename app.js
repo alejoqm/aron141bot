@@ -30,9 +30,9 @@ module.exports.server = async (event) => {
 
 
     const testMessage = {'chat': {'id': 505838126}};
-    /*publisher = new Publisher();
-    await publisher.publish(testMessage, "Testing message");*/
-    command.resolve(testMessage, 'Pokemon pikachu')
+    publisher = new Publisher();
+    await publisher.publish(testMessage, "Testing message");
+    //command.resolve(testMessage, 'Pokemon pikachu')
 
     var message = '';
     if(event.body) {

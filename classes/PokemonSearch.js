@@ -4,6 +4,10 @@ var baseUrl = "https://www.pokemon.com/us/pokedex/";
 var selector = ".version-descriptions .version-y";
 var selectorWeakness = ".active .dtm-weaknesses ul li a";
 var errorMsg = "Rili!! pokemon este, te buscare y te mordere";
+
+var Publisher = require('./Publisher.js');
+publisher = new Publisher();
+
 class PokemonSearch {
    constructor() {
    }
@@ -13,44 +17,44 @@ class PokemonSearch {
        return commands.includes(command.toLowerCase());
    }
 
-   perform(command, pokemon, callback, message, res) {
+   async perform(command, pokemon, message, res) {
 		if(ignoreCase.equals(command, "pokemon")) {
-			this.search(pokemon, callback, message, res);
+			await this.search(pokemon, message, res);
 		} else {
-			this.weakness(pokemon, callback, message, res);
+			await this.weakness(pokemon, message, res);
 		}
    }
 
-	search(pokemon, callback, message, res) {
+	async search(pokemon, message, res) {
 		var result = "";
 		try {
-			scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, function(err, data) {
+			scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selector, async function(err, data) {
 				console.log(err + " " + data)
 				if(err !== null) {
-				   callback(message, errorMsg, res);
+					await publisher.publish(message, errorMsg);
 				} else {
 				   result = Array.isArray(data) ? data[0] : data;
 				   console.log("data " + result)
-				   callback(message, result, res);
+					await publisher.publish(message, result);
 				}	
 			});
 		}
 		catch(err) {
-			console.log(err)
-			callback(message, errorMsg, res);
+			console.log(err);
+			await publisher.publish(message, '');
 		}	
 	}
 
-	weakness(pokemon, callback, message, res) {
+	async weakness(pokemon, callback, message, res) {
         var result = "";
-        scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selectorWeakness, function(err, data) {
+        scrapy.scrape('https://www.pokemon.com/us/pokedex/' + pokemon, selectorWeakness, async function(err, data) {
             console.log(err + " " + data)
             if(err !== null) {
-                callback(message, errorMsg, res);
+				await publisher.publish(message, errorMsg);
             } else {
                 result = Array.isArray(data) ? data.join() : data;
                 console.log("data " + result)
-                callback(message, result, res);
+				await publisher.publish(message, result);
             }
         });
 

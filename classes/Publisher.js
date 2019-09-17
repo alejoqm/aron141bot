@@ -6,9 +6,9 @@ class Publisher {
    }
 
   async publish(message, responseMessage) {
-      console.log("The response message is " + responsemessage)
-      if (responsemessage !== undefined) {
-          if (validator.isEmpty(responsemessage)) {
+      console.log("The response message is " + responseMessage)
+      if (responseMessage !== undefined) {
+          if (validator.isEmpty(responseMessage)) {
               return {"statusCode": 200};
           } else {
               await axios.post(

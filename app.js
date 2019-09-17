@@ -17,13 +17,22 @@ var database = new Database();
 var Publisher = require('./classes/Publisher.js');
 
 /*const message = {text: 'MySQL Synchronous', from: {username: 'alejoqm', first_name: 'Luis', last_name: 'Quintero'}, chat: {type: 'single', title: 'aronBoot', date: 1568386656}};
-database.insertMessage(message)*/
+database.insertMessage(message)
+
+const testMessage = {'chat': {'id': 505838126}};
+publisher = new Publisher();
+await publisher.publish(testMessage, "Testing message");
+command.resolve(testMessage, 'Pokemon pikachu')*/
+
 
 //Handle the GET endpoint on the root route /
 module.exports.server = async (event) => {
 
-    publisher = new Publisher();
-    await publisher.publish({'chat': {'id': 505838126}}, "Testing message");
+
+    const testMessage = {'chat': {'id': 505838126}};
+    /*publisher = new Publisher();
+    await publisher.publish(testMessage, "Testing message");*/
+    command.resolve(testMessage, 'Pokemon pikachu')
 
     var message = '';
     if(event.body) {

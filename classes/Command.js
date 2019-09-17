@@ -12,7 +12,7 @@ var Youtube = require("./Youtube.js")
 var youtube = new Youtube();
 const replaceString = require('replace-string');
 
-var Publisher = require('./classes/Publisher.js');
+var Publisher = require('./Publisher.js');
 publisher = new Publisher();
 
 var jsonWords = {
@@ -76,20 +76,20 @@ class Command {
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
 	   	if(pokemon.isACommand(command[0])) {
-		   pokemon.perform(command[0], command[1], callback, message);
+		   pokemon.perform(command[0], command[1], message);
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
-	   		await callback(message, greetings.sayHello(message))
+	   		await publisher.publish(message, greetings.sayHello(message))
 		} else if(ignoreCase.equals(command[0], "youtube")) {
 			await youtube.search(replaceString(textMessage.toLowerCase(), "youtube", '')).then(data => callback(message, data));
 	 	} 
 		else {
-		   await callback(message, this.getResponseMessage(message, textMessage));
+		   await publisher.publish(message, this.getResponseMessage(message, textMessage));
 	   	}
 	   } else {
-	  	   await callback(message, "");
+	  	   await publisher.publish(message, "");
 	   }
         } else {
-        	  await callback(message, "");
+        	  await publisher.publish(message, "");
 	}
    }
 

@@ -1,28 +1,36 @@
 const axios = require('axios')
+const validator = require('validator');
 
 class Publisher {
    constructor() {
    }
 
-  publish(message, responseMessage, res) {
-	axios.post(
-      'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
-      {
-        chat_id: message.chat.id,
-        text: responseMessage
+  async publish(message, responseMessage) {
+      console.log("The response message is " + responsemessage)
+      if (responsemessage !== undefined) {
+          if (validator.isEmpty(responsemessage)) {
+              return {"statusCode": 200};
+          } else {
+              await axios.post(
+                  'https://api.telegram.org/bot519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak/sendMessage',
+                  {
+                      chat_id: message.chat.id,
+                      text: responseMessage
+                  }
+              )
+                  .then(response => {
+                      console.log("Publishied");
+                      return {"statusCode": 200};
+                  })
+                  .catch(err => {
+                      // ...and here if it was not
+                      console.log('Error :', err);
+                      return {"statusCode": 500};
+               })
+          }
+      } else {
+          return {"statusCode": 200};
       }
-    )
-    .then(response => {
-      // We get here if the message was successfully posted
-      res.end('ok')
-    })
-    .catch(err => {
-      // ...and here if it was not
-      console.log('Error :', err)
-      res.end('Error :' + err)
-    }) 
-
   }
-
 }
 module.exports = Publisher;

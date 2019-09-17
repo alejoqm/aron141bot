@@ -12,6 +12,9 @@ var Youtube = require("./Youtube.js")
 var youtube = new Youtube();
 const replaceString = require('replace-string');
 
+var Publisher = require('./classes/Publisher.js');
+publisher = new Publisher();
+
 var jsonWords = {
 	"aron": {
 		"equal": "Destruyendo y Comiendo | Estrenando camita | Buscando a mi mama",
@@ -65,7 +68,7 @@ class Command {
    constructor() {
    }
    
-   resolve(message, textMessage, callback, res) {
+   async resolve(message, textMessage) {
 	textMessage = accents.remove(textMessage);
 
 
@@ -73,20 +76,20 @@ class Command {
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
 	   	if(pokemon.isACommand(command[0])) {
-		   pokemon.perform(command[0], command[1], callback, message, res);
+		   pokemon.perform(command[0], command[1], callback, message);
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
-	   		callback(message, greetings.sayHello(message), res)
+	   		await callback(message, greetings.sayHello(message))
 		} else if(ignoreCase.equals(command[0], "youtube")) {
-			youtube.search(replaceString(textMessage.toLowerCase(), "youtube", ''), message, res, callback);
+			await youtube.search(replaceString(textMessage.toLowerCase(), "youtube", '')).then(data => callback(message, data));
 	 	} 
 		else {
-		   callback(message, this.getResponseMessage(message, textMessage), res);
+		   await callback(message, this.getResponseMessage(message, textMessage));
 	   	}
 	   } else {
-	  	   callback(message, "", res);
+	  	   await callback(message, "");
 	   }
         } else {
-        	  callback(message, "", res);
+        	  await callback(message, "");
 	}
    }
 

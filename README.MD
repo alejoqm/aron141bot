@@ -1,6 +1,6 @@
 #Run
 
-node index.js
+node app.js
 
 #Install
 

@@ -8,30 +8,30 @@ class Youtube {
     constructor() {
     }
 
-    search(keyWord, message, res, callback) {
+    async search(keyWord) {
         console.log(util.format(GOOGLE_API, KEY_ID, keyWord));
         https.get(util.format(GOOGLE_API, KEY_ID, keyWord), (resp) => {
-            let data = '';
+                let data = '';
+                // A chunk of data has been recieved.
+                resp.on('data', (chunk) => {
+                    data += chunk;
+                });
 
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
+                // The whole response has been received. Print out the result.
+                resp.on('end', () => {
+                    if(JSON.parse(data).items !== undefined && JSON.parse(data).items[0].id !== undefined && JSON.parse(data).items[0].id.videoId !== undefined) {
+                        console.log(JSON.parse(data).items[0].id.videoId)
+                        return JSON.parse(data).items[0].id.videoId;
+                    } else {
+                        return '';
+                    }
+                });
 
-            // The whole response has been received. Print out the result.
-            resp.on('end', () => {
-                if(JSON.parse(data).items !== undefined && JSON.parse(data).items[0].id !== undefined && JSON.parse(data).items[0].id.videoId !== undefined) {
-                    callback(message, util.format(BASE_YOUTUBE_URL, JSON.parse(data).items[0].id.videoId), res);
-                } else {
-                    callback(message, '', res);
-                }
-            });
-
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
+            }).on("error", (err) => {
+                console.log("Error: " + err.message);
+                return '';
         });
     }
-
 }
 
 module.exports = Youtube;

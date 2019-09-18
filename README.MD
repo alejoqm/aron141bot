@@ -6,3 +6,7 @@ node app.js
 
 npm i -S googleapis@30.0.0
 npm i -S google-auth-library@4.0.0
+
+#Test
+
+npm test app.spec.js 

@@ -4,7 +4,8 @@
   "description": "POC of telegram bot",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
+    "test-unit": "NODE_ENV=test mocha '/**/*.spec.js'",
     "start": "node app.js"
   },
   "author": "Alejoqm",
@@ -12,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "latest",
+    "chai": "^4.2.0",
     "classes": "^0.3.0",
     "each": "^1.2.0",
     "express": "^4.17.1",
@@ -22,7 +24,9 @@
     "ignore-case": "^0.1.0",
     "jquery": "^3.3.1",
     "keyvalue": "^1.0.0",
+    "mocha": "^6.2.0",
     "mysql": "^2.17.1",
+    "nock": "^11.3.4",
     "node-scrapy": "^0.3.1",
     "node-telegram-bot-api": "^0.30.0",
     "pg": "^7.11.0",
@@ -30,7 +34,9 @@
     "remove-accents": "^0.4.2",
     "replace-string": "^3.0.0",
     "serverless-http": "^2.3.0",
+    "sinon": "^7.4.2",
     "sync-mysql": "^3.0.1",
+    "test-console": "^1.1.0",
     "validator": "^10.8.0"
   }
 }

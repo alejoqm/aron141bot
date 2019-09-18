@@ -1,7 +1,4 @@
-var bodyParser = require('body-parser')
 var ignoreCase = require('ignore-case');
-var validator = require('validator');
-
 var Command = require('./classes/Command.js')
 var Offensive = require('./classes/Offensive');
 var Gratitude = require('./classes/Gratitude');
@@ -14,21 +11,8 @@ var gratitude = new Gratitude();
 var subjectName = new SubjectName();
 var database = new Database();
 
-var Publisher = require('./classes/Publisher.js')
-var Youtube = require('./classes/Youtube.js');
-
-//var youtube = new Youtube();
-//const testMessage = {'chat': {'id': 505838126}};
-//command.resolve(testMessage, 'youtube pikachu')
-//youtube.search(testMessage, 'Unova');
-
 /*const message = {text: 'MySQL Synchronous', from: {username: 'alejoqm', first_name: 'Luis', last_name: 'Quintero'}, chat: {type: 'single', title: 'aronBoot', date: 1568386656}};
-database.insertMessage(message)
-
-publisher = new Publisher();
-await publisher.publish(testMessage, "Testing message");
-command.resolve(testMessage, 'Pokemon pikachu')*/
-
+database.insertMessage(message)*/
 
 //Handle the GET endpoint on the root route /
 module.exports.server = async (event) => {

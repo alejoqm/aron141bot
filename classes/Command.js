@@ -76,11 +76,11 @@ class Command {
 	   var command = textMessage.split(" ");
 	   if(Array.isArray(command)) {   
 	   	if(pokemon.isACommand(command[0])) {
-		   pokemon.perform(command[0], command[1], message);
+		   await pokemon.perform(command[0], command[1], message);
 	   	} else if(ignoreCase.equals(command[0], "hola")) {
 	   		await publisher.publish(message, greetings.sayHello(message))
 		} else if(ignoreCase.equals(command[0], "youtube")) {
-			await youtube.search(replaceString(textMessage.toLowerCase(), "youtube", '')).then(data => callback(message, data));
+			await youtube.search(message, replaceString(textMessage.toLowerCase(), "youtube", ''));
 	 	} 
 		else {
 		   await publisher.publish(message, this.getResponseMessage(message, textMessage));

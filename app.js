@@ -14,12 +14,17 @@ var gratitude = new Gratitude();
 var subjectName = new SubjectName();
 var database = new Database();
 
-var Publisher = require('./classes/Publisher.js');
+var Publisher = require('./classes/Publisher.js')
+var Youtube = require('./classes/Youtube.js');
+
+//var youtube = new Youtube();
+//const testMessage = {'chat': {'id': 505838126}};
+//command.resolve(testMessage, 'youtube pikachu')
+//youtube.search(testMessage, 'Unova');
 
 /*const message = {text: 'MySQL Synchronous', from: {username: 'alejoqm', first_name: 'Luis', last_name: 'Quintero'}, chat: {type: 'single', title: 'aronBoot', date: 1568386656}};
 database.insertMessage(message)
 
-const testMessage = {'chat': {'id': 505838126}};
 publisher = new Publisher();
 await publisher.publish(testMessage, "Testing message");
 command.resolve(testMessage, 'Pokemon pikachu')*/
@@ -29,10 +34,10 @@ command.resolve(testMessage, 'Pokemon pikachu')*/
 module.exports.server = async (event) => {
 
 
-    const testMessage = {'chat': {'id': 505838126}};
+    /*const testMessage = {'chat': {'id': 505838126}};
     publisher = new Publisher();
     await publisher.publish(testMessage, "Testing message");
-    //command.resolve(testMessage, 'Pokemon pikachu')
+    command.resolve(testMessage, 'Pokemon pikachu')*/
 
     var message = '';
     if(event.body) {

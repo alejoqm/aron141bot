@@ -1,27 +1,15 @@
-var ignoreCase = require('ignore-case');
-var Command = require('./classes/Command.js')
-var Offensive = require('./classes/Offensive');
-var Gratitude = require('./classes/Gratitude');
-var SubjectName = require('./classes/SubjectName');
-var Database = require('./classes/Database.js');
+const ignoreCase = require('ignore-case');
+const Database = require('./classes/Database.js');
 
-var command = new Command();
-var offensive = new Offensive();
-var gratitude = new Gratitude();
-var subjectName = new SubjectName();
-var database = new Database();
+const database = new Database();
 
-/*const message = {text: 'MySQL Synchronous', from: {username: 'alejoqm', first_name: 'Luis', last_name: 'Quintero'}, chat: {type: 'single', title: 'aronBoot', date: 1568386656}};
-database.insertMessage(message)*/
+const File = require('./classes/File.js')
+const file = new File();
+
+file.getFile();
 
 //Handle the GET endpoint on the root route /
 module.exports.server = async (event) => {
-
-
-    /*const testMessage = {'chat': {'id': 505838126}};
-    publisher = new Publisher();
-    await publisher.publish(testMessage, "Testing message");
-    command.resolve(testMessage, 'Pokemon pikachu')*/
 
     var message = '';
     if(event.body) {
@@ -41,35 +29,14 @@ module.exports.server = async (event) => {
         return message ? {"statusCode": 200, "body": "message " + message.date} : {"statusCode": 400, "body": "message is undefined"};
     } else {
         await database.insertMessage(message);
-        if(message.forward_from !== undefined || message.forward_from_chat !== undefined) {
-            console.log('This message was forwarded');
-            await publisher.publish(message, 'Seriusly ' + message.from.username + ', generando spam!!');
-        } else if (message.photo !== undefined) {
+        if (message.photo !== undefined) {
             console.log(message.photo);
             //publish(message, "Que linda foto!", res)
             return {"statusCode": 200};
         }
-        else if (message.text == undefined) {
+        else {
             return {"statusCode": 200};
-        } else {
-            var subjectNameValue = subjectName.getSubjectName(message.text);
-            var offensiveValue = offensive.hasOffensiveContent(message.text);
-            var gratitudeValue = gratitude.hasGratitudeContent(message.text);
-            console.log('New message ' + message.text + ' Subject ' + subjectNameValue + " " + offensiveValue)
-
-            if (ignoreCase.equals("aron", subjectNameValue)) {
-                if (offensiveValue) {
-                    await publisher.publish(message, "are you talking to me? https://www.youtube.com/watch?v=LpJOxbaC8YU");
-                } else if (gratitudeValue) {
-                    await publisher.publish(message, "Gracias a ti");
-                } else {
-                    command.resolve(message, message.text);
-                }
-            } else {
-                command.resolve(message, message.text);
-            }
         }
-        return {"statusCode": 200};
     }
 }
 

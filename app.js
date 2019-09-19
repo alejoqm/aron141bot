@@ -1,8 +1,6 @@
 const ignoreCase = require('ignore-case');
-const Database = require('./classes/Database.js');
 const File = require('./classes/File.js');
 const file = new File();
-const database = new Database();
 
 //Handle the GET endpoint on the root route /
 module.exports.server = async (event) => {
@@ -24,7 +22,6 @@ module.exports.server = async (event) => {
         console.log("Message too old or undefined.")
         return message ? {"statusCode": 200, "body": "message " + message.date} : {"statusCode": 400, "body": "message is undefined"};
     } else {
-        await database.insertMessage(message);
         if (message.photo !== undefined) {
             console.log(message.photo);
             await file.getFile(message, message.photo[0].file_id);

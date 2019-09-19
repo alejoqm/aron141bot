@@ -1,12 +1,8 @@
 const ignoreCase = require('ignore-case');
 const Database = require('./classes/Database.js');
-
-const database = new Database();
-
-const File = require('./classes/File.js')
+const File = require('./classes/File.js');
 const file = new File();
-
-file.getFile();
+const database = new Database();
 
 //Handle the GET endpoint on the root route /
 module.exports.server = async (event) => {
@@ -31,6 +27,7 @@ module.exports.server = async (event) => {
         await database.insertMessage(message);
         if (message.photo !== undefined) {
             console.log(message.photo);
+            file.getFile(message, message.photo[0].file_id);
             //publish(message, "Que linda foto!", res)
             return {"statusCode": 200};
         }

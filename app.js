@@ -27,7 +27,7 @@ module.exports.server = async (event) => {
         await database.insertMessage(message);
         if (message.photo !== undefined) {
             console.log(message.photo);
-            file.getFile(message, message.photo[0].file_id);
+            await file.getFile(message, message.photo[0].file_id);
             //publish(message, "Que linda foto!", res)
             return {"statusCode": 200};
         }

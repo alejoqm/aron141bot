@@ -14,25 +14,54 @@ const BUCKET = 'aronbottelegram';
 const TOKEN = '519985598:AAEGDJvreGjvtIKrI3i9yb6Sjvn3-KdfQak'
 const GET_PHOTO = 'https://api.telegram.org/bot%s/getFile?file_id=%s'
 
+AWS.config.update({
+    accessKeyId: KEY_ID,
+    secretAccessKey: ACCESS_KEY
+});
+
+const s3 = new AWS.S3();
+
 class File {
 
     constructor() {
     }
 
     async getFile(message, fileId) {
-        this.getFilePath(fileId).then(res => {
-            this.downloadFile(message, res);
-        })
+        var filePath = '';
+        await this.getFilePath(fileId).then(res => {
+           filePath = res;
+        });
+
+        var imageStream = '';
+
+        await this.downloadFile(message, filePath).then(_imageStream => {
+            imageStream = _imageStream
+        });
+
+        var imageRemoteName = '';
+        await this.uploadFile(message, imageStream).then(_url => {
+            imageRemoteName = _url;
+        });
+
+        console.log('Remote name: ' + imageRemoteName);
+
+        var url = '';
+        await this.getInfoUpload(imageRemoteName).then(awsUrl => url = awsUrl);
+
+        console.log('Ready to publish  ' + url);
+
+        await publisher.publish(message, "Your image was saved " + url);
+
     }
 
     async downloadFile(message, filePath) {
-        var imageStream;
-        await axios.get(GET_FILE_URL + filePath,  {
-            responseType: 'arraybuffer'
-        })
-            .then(response => imageStream = Buffer.from(response.data, 'base64'));
-        console.log(GET_FILE_URL + filePath)
-        await this.uploadFile(message, imageStream)
+        console.log('downloading file ' + GET_FILE_URL + filePath);
+        return new Promise(function (resolve, reject) {
+            axios.get(GET_FILE_URL + filePath,  {
+                responseType: 'arraybuffer'
+            })
+                .then(response => resolve(Buffer.from(response.data, 'base64')));
+        });
     }
 
     async getFilePath(fileId) {
@@ -46,34 +75,34 @@ class File {
             })
             .catch(err => {
                 throw err;
-            })
+            });
+        console.log("File path " + res)
         return res;
     }
 
     async uploadFile(message, imageStream) {
-        const imageRemoteName = message.from.username + '_' + message.date + '.jpg';
-        console.log('Uploading Image');
+        console.log('Uploading to S3.')
+        return new Promise(function (resolve, reject) {
+            const imageRemoteName = message.from.username + '_' + message.date + '.jpg';
+            console.log('Uploading Image');
 
-        AWS.config.update({
-            accessKeyId: KEY_ID,
-            secretAccessKey: ACCESS_KEY
+            let params = {
+                'Bucket': BUCKET,
+                'Key': imageRemoteName,
+                'Body': imageStream,
+            }
+
+            s3.putObject(params, function(response) {
+                console.log('Upload OK.');
+            });
+            resolve(imageRemoteName);
         });
+     }
 
-        const s3 = new AWS.S3();
-
-        let params = {
-            'Bucket': BUCKET,
-            'Key': imageRemoteName,
-            'Body': imageStream,
-        }
-
-        var url = '';
-        await s3.putObject(params, function(response) {
-            console.log(response);
-            url = s3.getSignedUrl('getObject', {Bucket: BUCKET, Key: imageRemoteName});
-        });
-        console.log(url);
-        await publisher.publish(message, url);
-    }
+     async getInfoUpload(imageRemoteName) {
+        return new Promise(function (resolve, reject) {
+            resolve(s3.getSignedUrl('getObject', {Bucket: BUCKET, Key: imageRemoteName}));
+        })
+     }
 }
 module.exports = File;

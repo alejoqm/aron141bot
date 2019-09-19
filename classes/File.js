@@ -5,6 +5,9 @@ const AWS = require('aws-sdk');
 
 const testMessage = {'chat': {'id': 505838126}, 'from' : {'username': 'Alejoq'}, 'date': 123123};
 
+const KEY_ID = process.env.key_id;
+const ACCESS_KEY = process.env.access_key;
+
 class File {
 
     constructor() {
@@ -43,8 +46,8 @@ class File {
         console.log('Uploading Image');
 
         AWS.config.update({
-            accessKeyId: "AKIA2HHVEZGPMBKHOP46",
-            secretAccessKey: "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"
+            accessKeyId: KEY_ID,
+            secretAccessKey: ACCESS_KEY
         });
 
         const s3 = new AWS.S3();
